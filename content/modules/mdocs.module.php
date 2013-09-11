@@ -8,8 +8,8 @@
   * @license GNU Affero General Public License 3, see license.txt
   */
 
-require PANTHERA_DIR. '/share/php-markdown/Michelf/Markdown.php';
-require PANTHERA_DIR. '/share/php-markdown/Michelf/MarkdownExtra.php';
+require SITE_DIR. '/content/share/php-markdown/Michelf/Markdown.php';
+require SITE_DIR. '/content/share/php-markdown/Michelf/MarkdownExtra.php';
 global $panthera;
 $panthera -> importModule('filesystem');
 $panthera -> importModule('phpquery');
