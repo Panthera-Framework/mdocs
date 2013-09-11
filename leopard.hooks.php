@@ -18,7 +18,7 @@ function _mdocsPostRemove($input)
 {
     global $panthera;
     $panthera -> logging -> output('Removing php-markdown', 'leopard');
-    removeDirectory(SITE_DIR. '/content/share/php-markdown');
+    deleteDirectory(SITE_DIR. '/content/share/php-markdown');
     return $input;
 }
 
