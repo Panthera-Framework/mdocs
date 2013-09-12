@@ -28,6 +28,7 @@ function _mdocsPostInstall($package)
     $panthera -> logging -> output('Creating default configuration', 'leopard');
     
     $panthera -> config -> getKey('mdocs.src', 'https://github.com/Panthera-Framework/panthera-docs', 'string', 'mdocs');
+    $panthera -> config -> getKey('mdocs.branch', 'master', 'string', 'mdocs');
     $panthera -> config -> getKey('mdocs.apikey', generateRandomString(32), 'string', 'mdocs');
     $panthera -> config -> getKey('mdocs.templateurl', '{$PANTHERA_URL}/?display=docs&section={$section}&title={$title}&language={$language}', 'string', 'mdocs');
     
@@ -42,7 +43,7 @@ function _mdocsPostInstall($package)
         'linkType' => 'ajax'
     );
     
-    $menu = $panthera -> config -> setKey('settings.items', $menu, 'array', 'mdocs');
+    $menu = $panthera -> config -> setKey('settings.items', $menu, 'array', 'settings');
     
     return $package;
 }
@@ -63,6 +64,8 @@ function _mdocsPostRemove($input)
     $panthera -> logging -> output('Removing configuration', 'leopard');
     $panthera -> config -> removeKey('mdocs.key');
     $panthera -> config -> removeKey('mdocs.templateurl');
+    $panthera -> config -> removeKey('mdocs.branch');
+    $panthera -> config -> removeKey('mdocs.src');
     
     // remove php-markdown library
     $panthera -> logging -> output('Removing php-markdown', 'leopard');
