@@ -10,7 +10,7 @@ function _mdocsPostInstall($package)
     @mkdir(SITE_DIR. '/content/share/php-markdown');
 
     $panthera -> logging -> output ('Installing php-markdown library from github', 'leopard');
-    scm::cloneBranch('https://github.com/michelf/php-markdown.git', SITE_DIR. '/content/share/php-markdown', 'lib');
+    scm::cloneBranch('https://github.com/michelf/php-markdown', SITE_DIR. '/content/share/php-markdown', 'lib');
     return $package;
 }
 
