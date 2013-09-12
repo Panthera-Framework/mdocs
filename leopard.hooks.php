@@ -18,7 +18,7 @@ function _mdocsPostInstall($package)
     // install php-markdown library
     @mkdir(SITE_DIR. '/content/share/php-markdown');
     $panthera -> logging -> output ('Installing php-markdown-extra-extended library from github', 'leopard');
-    scm::cloneBranch('https://github.com/egil/php-markdown-extra-extended', SITE_DIR. '/content/share/php-markdown-extra-extended', 'lib');
+    scm::cloneBranch('https://github.com/egil/php-markdown-extra-extended', SITE_DIR. '/content/share/php-markdown-extra-extended', 'master');
     
     // updating webroot
     $panthera -> logging -> output('Updating webroot', 'leopard');
