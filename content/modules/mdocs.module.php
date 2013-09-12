@@ -211,9 +211,9 @@ class mdocs
                 continue;
             }
             
-            $highlighted = highlight_string($contents, true);
-            $highlighted = substr($highlighted, 9, strlen($highlighted)-7); // remove <code>php and </code>
-            $html = str_replace($contents, $highlighted, $html);
+            $highlighted = highlight_string(substr($contents, 4), true); // remove "php" at beigning
+            $highlighted = str_replace('<code>', '', str_replace('</code>', '', $highlighted)); // remove <code> and </code>
+            $html = htmlspecialchars_decode(str_replace($contents, $highlighted, $html));
         }
         
         return $html;
