@@ -191,6 +191,35 @@ class mdocs
     }
     
     /**
+      * Colorize PHP syntax
+      *
+      * @param string name
+      * @return mixed 
+      * @author Damian Kęska
+      */
+    
+    public function colorizePHPSyntax($html, $phpQuery)
+    {
+        // <code>php
+        
+        foreach ($phpQuery->find('code') as $tag)
+        {
+            $contents = pq($tag)->html();
+            
+            if (strtolower(substr($contents, 0, 3)) != 'php')
+            {
+                continue;
+            }
+            
+            $highlighted = highlight_string($contents);
+            $highlighted = substr($highlighted, 9, strlen($highlighted)-7); // remove <code>php and </code>
+            $html = str_replace($contents, $highlighted, $html);
+        }
+        
+        return $html;
+    }
+    
+    /**
       * Build docs
       *
       * @return void 
@@ -289,6 +318,7 @@ class mdocs
                 }
                 
                 $html = $this->filterLinks($html, $phpQuery);
+                $html = $this->colorizePHPSyntax($html, $phpQuery);
 
                 $outputFile = $language. '-' .substr(hash('md4', $section.$fileContents), 0, 16). '-' .substr(seoUrl($title), 0, 16). '.html';
                 list($html, $outputFile, $_a) = $panthera -> get_filters('mdocs.html.output', array($html, $outputFile, $phpQuery));
