@@ -8,8 +8,8 @@
   * @license GNU Affero General Public License 3, see license.txt
   */
 
-require SITE_DIR. '/content/share/php-markdown/Michelf/Markdown.php';
-require SITE_DIR. '/content/share/php-markdown/Michelf/MarkdownExtra.php';
+require SITE_DIR. '/content/share/php-markdown-extra-extended/markdown.php';
+require SITE_DIR. '/content/share/php-markdown-extra-extended/markdown_extended.php';
 global $panthera;
 $panthera -> importModule('filesystem');
 $panthera -> importModule('phpquery');
@@ -279,7 +279,7 @@ class mdocs
                 }
                 
                 // transform markdown to html early to be able to get some informations from it like title if its missing in manifest.json
-                $html = Markdown::defaultTransform($fileContents);
+                $html = MarkdownExtended($fileContents);
                 $phpQuery = phpQuery::newDocument($html);
                         
                 // get title from any <h1> or <h2> if not present in manifest.json

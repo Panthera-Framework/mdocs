@@ -17,8 +17,8 @@ function _mdocsPostInstall($package)
 
     // install php-markdown library
     @mkdir(SITE_DIR. '/content/share/php-markdown');
-    $panthera -> logging -> output ('Installing php-markdown library from github', 'leopard');
-    scm::cloneBranch('https://github.com/michelf/php-markdown', SITE_DIR. '/content/share/php-markdown', 'lib');
+    $panthera -> logging -> output ('Installing php-markdown-extra-extended library from github', 'leopard');
+    scm::cloneBranch('https://github.com/egil/php-markdown-extra-extended', SITE_DIR. '/content/share/php-markdown-extra-extended', 'lib');
     
     // updating webroot
     $panthera -> logging -> output('Updating webroot', 'leopard');
@@ -68,8 +68,8 @@ function _mdocsPostRemove($input)
     $panthera -> config -> removeKey('mdocs.src');
     
     // remove php-markdown library
-    $panthera -> logging -> output('Removing php-markdown', 'leopard');
-    deleteDirectory(SITE_DIR. '/content/share/php-markdown');
+    $panthera -> logging -> output('Removing php-markdown-extra-extended', 'leopard');
+    deleteDirectory(SITE_DIR. '/content/share/php-markdown-extra-extended');
     
     // removing from menu
     $panthera -> config -> loadOverlay('settings');
