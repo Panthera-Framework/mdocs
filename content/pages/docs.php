@@ -9,13 +9,22 @@
   
 $panthera -> importModule('mdocs');
 
+
 if (isset($_GET['_callback_api_key']))
 {
-    if ($_GET['_callback_api_key'] == $panthera -> config -> getKey('mdocs.apikey', generateRandomString(32), 'string', 'mdocs'))
+    // just to make sure it will create default configuration
+    $src = $panthera -> config -> getKey('mdocs.src', 'https://github.com/Panthera-Framework/panthera-docs', 'string', 'mdocs');
+    $branch = $panthera -> config -> getKey('mdocs.branch', 'master', 'string', 'mdocs');
+    $apiKey = $panthera -> config -> getKey('mdocs.apikey', generateRandomString(32), 'string', 'mdocs');
+    $templateURL = $panthera -> config -> getKey('mdocs.templateurl', '{$PANTHERA_URL}/?display=docs&section={$section}&title={$title}&language={$language}', 'string', 'mdocs');
+
+    if ($_GET['_callback_api_key'] == $apiKey)
     {
         print("Build started\n");
         $docs = new mdocs;
-        $docs -> setTemplateURL($panthera -> config -> getKey('mdocs.templateurl', '{$PANTHERA_URL}/?display=docs&section={$section}&title={$title}&language={$language}', 'string', 'mdocs'));
+        $docs -> src = $src;
+        $docs -> branch = $branch;
+        $docs -> setTemplateURL($templateURL);
         $docs -> build();
         print("Done.");
         pa_exit();
