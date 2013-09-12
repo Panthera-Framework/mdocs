@@ -205,6 +205,8 @@ class mdocs
         foreach ($phpQuery->find('code') as $tag)
         {
             $contents = pq($tag)->html();
+            $html = str_replace($contents, nl2br($contents), $html);
+            $contents = nl2br($contents);
             
             if (strtolower(substr($contents, 0, 3)) != 'php')
             {
