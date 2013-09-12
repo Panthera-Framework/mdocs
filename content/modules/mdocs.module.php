@@ -13,7 +13,6 @@ require SITE_DIR. '/content/share/php-markdown-extra-extended/markdown_extended.
 global $panthera;
 $panthera -> importModule('filesystem');
 $panthera -> importModule('phpquery');
-use \Michelf\Markdown;
 
 class mdocs
 {
@@ -151,6 +150,12 @@ class mdocs
         foreach ($phpQuery->find('a') as $tag)
         {
             $originalLink = pq($tag)->attr('href');
+            
+            if (strpos($originalLink, '/src/') === False)
+            {
+                continue;
+            }
+            
             $link = parse_url($originalLink, PHP_URL_PATH);
             $link = substr($link, strpos($link, 'src/')+4, strlen($link));
 
@@ -320,7 +325,7 @@ class mdocs
                 }
                 
                 $html = $this->filterLinks($html, $phpQuery);
-                $html = $this->colorizePHPSyntax($html, $phpQuery);
+                //$html = $this->colorizePHPSyntax($html, $phpQuery);
 
                 $outputFile = $language. '-' .substr(hash('md4', $section.$fileContents), 0, 16). '-' .substr(seoUrl($title), 0, 16). '.html';
                 list($html, $outputFile, $_a) = $panthera -> get_filters('mdocs.html.output', array($html, $outputFile, $phpQuery));
