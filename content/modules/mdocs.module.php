@@ -326,6 +326,9 @@ class mdocs
                 
                 $html = $this->filterLinks($html, $phpQuery);
                 //$html = $this->colorizePHPSyntax($html, $phpQuery);
+                
+                $html = str_ireplace('<code>', '<code><pre>', $html);
+                $html = str_ireplace('</code>', '</pre></code>', $html);
 
                 $outputFile = $language. '-' .substr(hash('md4', $section.$fileContents), 0, 16). '-' .substr(seoUrl($title), 0, 16). '.html';
                 list($html, $outputFile, $_a) = $panthera -> get_filters('mdocs.html.output', array($html, $outputFile, $phpQuery));
